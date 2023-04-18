@@ -3,7 +3,7 @@ public class RemoteControl {
     Command[] commands;
 
     public RemoteControl (){
-        commands = new Command[9];
+        commands = new Command[6];
         commands[0] = new Slots();
         commands[1] = new Roulette();
         commands[2] = new PowerUps();
@@ -12,7 +12,7 @@ public class RemoteControl {
         commands[5] = new Exit();
     }
 
-    public void buttonPushed(int slot, LuckyBet luckyBet){
-        commands[slot-1].execute(luckyBet);
+    public void buttonPushed(int slot, User user){
+        commands[slot-1].execute(user);
     }
 }
