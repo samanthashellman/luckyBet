@@ -1,3 +1,3 @@
 public interface Command {
-    public void execute(LuckyBet luckyBet);
+    public void execute(User user);
 }
