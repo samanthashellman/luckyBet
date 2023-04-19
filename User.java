@@ -11,8 +11,8 @@ public class User {
     // track power-ups too
 
     public User(){
-        balance = 50;
-        
+        balance = 50; //test balance
+
      }
 
     public int getBalance() {
