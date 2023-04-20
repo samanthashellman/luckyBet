@@ -11,7 +11,7 @@ public class User {
     // track power-ups too
 
     public User(){
-        balance = 50; // starting balance
+        balance = 100; // starting balance
 
      }
 
