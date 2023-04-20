@@ -7,21 +7,16 @@ public class Roulette implements Command{
 
     
 
-    private int valueChipAmount;
-    private int nonValueChipAmount;
     private int buyInAmount;
     private User currUser;
-    private Dictionary<Integer, String> chips= new Hashtable<>();
-    private boolean valueChip = false;
-    private boolean nonValChip = false;
+    private Dictionary<String, String> chips= new Hashtable<>();
     private int totalChipQuantity;
+    private Boolean quit = false;
     
     
     //balance has been hardcoded to 50 dollars.
 
     Roulette() { 
-        nonValueChipAmount = 0;
-        valueChipAmount = 0;
         buyInAmount = 0;
         //this.currUser = user; TODO: make constructor take in user param
         initTable();
@@ -30,6 +25,9 @@ public class Roulette implements Command{
     public void execute(User user){
         System.out.println("Let's play Roulette!");
         setBuyIn();
+        if(quit==true) {
+            return;
+        }
         chooseBet();
 
 
@@ -42,15 +40,14 @@ public class Roulette implements Command{
         Scanner input = new Scanner(System.in); 
         int chip = input.nextInt();
         if(chip == 1) {
-            valueChip = true;
             while(!end) {
                 System.out.print("Value chip it is! How many would you like? Remember, value chips are 5.00 each.\n" );
                 int amountValue = input.nextInt();
                 if(5*amountValue > 50) { //replace with user.getbalance()
-                    System.out.print("Error. Looks like your balance is isn't large enough to purchase. Try again or go to the main menu and increase your balance.");
+                    System.out.print("Error. Looks like your balance is isn't large enough to purchase. Try again or go to the main menu and increase your balance.\n");
                 }
                 else if(amountValue>35) {
-                    System.out.println("Error. The amount of additional chips exceeds the number of spots on the roulette table. Purchase less chips.");
+                    System.out.println("Error. The amount of additional chips exceeds the number of spots on the roulette table. Purchase less chips.\n");
                 }
                 else {
                     totalChipQuantity += amountValue;
@@ -63,7 +60,6 @@ public class Roulette implements Command{
             
         }
         else if(chip == 2) {
-            nonValChip = true;
             while(!end) {
                 System.out.println("Non-Value chip it is! How many would you like?");
                 int amountValue = input.nextInt();
@@ -76,7 +72,7 @@ public class Roulette implements Command{
                     System.out.print("Error. The amount of additional chips exceeds the number of spots on the roulette table. Purchase less chips.\n");
                 }
                 else {
-                    nonValueChipAmount += amountValue;
+                    totalChipQuantity += amountValue;
                    // currUser.updateBalance(-costPerChip*amountValue);
                     buyInAmount += costPerChip*amountValue;
                     System.out.print("You've purchased " + amountValue + " non-value chips or a total buy in of: " + buyInAmount + ".00.\n");  
@@ -85,7 +81,9 @@ public class Roulette implements Command{
             }
             
         }
-        else if(chip == 3) { //TODO: implement end game function.
+        else if(chip == 3) { 
+            System.out.print("Now exiting Roulette\n");
+            quit = true;
             return;
         }
         else{
@@ -98,7 +96,7 @@ public class Roulette implements Command{
     private void initTable() {
         for(int i = 1; i<36; i++) {
             String key = Integer.toString(i);
-            chips.put(i,key);
+            chips.put(key,key);
         } 
         
     }
@@ -138,11 +136,12 @@ public class Roulette implements Command{
     }
   
     private void straightUpBet() {
-
+        initTable();
         System.out.print("Welcome to straight up bet! Here you must choose a single spot for each of your chips to go on.\n");
         int count = 1; //to track how many chips we've put down on the table.
-        Scanner input = new Scanner(System.in); 
+         displayTable();
         while(count<totalChipQuantity+1) {
+            Scanner input = new Scanner(System.in);
             System.out.print("Select spot for Chip " + count + ":\n");
             String place = input.next();
             Integer value = Integer.parseInt(place); //change input into string for key-value comparison.
@@ -151,15 +150,13 @@ public class Roulette implements Command{
                 System.out.print("Invalid entry, choose a number between 0 and 35.\n");
             }
             else if(chips.get(place)==place) {
-                chips.put(value, "X");
-                chips.toString();//successfully marking roulette table place w/ chip.
+                chips.put(place, "X"); //successfully marking roulette table place w/ chip.
                 count++;
-                System.out.print("worked");
+                System.out.print("worked"); //debug statement
             }
             //edge case if they pick place they've already chosen
             else{
-                System.out.print("Name: " + value);
-                System.out.print("Key: " + chips.get(place));
+                System.out.print("Value with key 2: " + chips.get("2"));
                 System.out.print("You've already placed a chip here! Try another spot.\n");
             }
             
@@ -186,8 +183,7 @@ public class Roulette implements Command{
 
     }
     private void displayTable() {
-        System.out.print(" -----------------------------\n");
-        System.out.print("|\n|"); 
+        System.out.print(" -----------------------------\n"); 
 
         
     }
