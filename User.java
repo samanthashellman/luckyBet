@@ -10,13 +10,16 @@ public class User {
     String password;
     // track power-ups too
 
-    public User(){ }
+    public User(){
+        balance = 50; //test balance
+
+     }
 
     public int getBalance() {
         return balance;
     }
-    public void setBalance(int balance) {
-        this.balance = balance;
+    public void updateBalance(int balance) {
+        this.balance += balance;
     }
     public void updateMoneyWonRoulette(int money) {
         moneyWonRoulette += money;
