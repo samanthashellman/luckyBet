@@ -3,6 +3,7 @@ import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 public class Roulette implements Command{
 
     
@@ -10,6 +11,8 @@ public class Roulette implements Command{
     private int buyInAmount;
     private User currUser;
     private Dictionary<String, String> chips= new Hashtable<>();
+    private Map<Integer, String> table  = new HashMap<Integer, String>(); //tester
+    List<Integer> alreadyPlaced = new ArrayList<Integer>();
     private int totalChipQuantity;
     private Boolean quit = false;
     
@@ -19,11 +22,12 @@ public class Roulette implements Command{
     Roulette() { 
         buyInAmount = 0;
         //this.currUser = user; TODO: make constructor take in user param
-        initTable();
+        
 
     }
     public void execute(User user){
         System.out.println("Let's play Roulette!");
+        initTable();
         setBuyIn();
         if(quit==true) {
             return;
@@ -95,8 +99,8 @@ public class Roulette implements Command{
 
     private void initTable() {
         for(int i = 1; i<36; i++) {
-            String key = Integer.toString(i);
-            chips.put(key,key);
+            String val = Integer.toString(i);
+            table.put(i, val);      
         } 
         
     }
@@ -114,8 +118,15 @@ public class Roulette implements Command{
                 end = true;
             }
             else if (betChoice == 2) {
-                fiveNumBet();
-                end = true;
+                if(totalChipQuantity<5) {
+                   System.out.print("You don't have 5 chips. Please buy more."); //TODO go back and add more chips option. 
+                }
+                else {
+                    fiveNumBet();
+                    end = true;
+                }
+
+                
             }
             else if(betChoice ==3) {
                 colBet();
@@ -139,33 +150,52 @@ public class Roulette implements Command{
         initTable();
         System.out.print("Welcome to straight up bet! Here you must choose a single spot for each of your chips to go on.\n");
         int count = 1; //to track how many chips we've put down on the table.
-         displayTable();
         while(count<totalChipQuantity+1) {
             Scanner input = new Scanner(System.in);
             System.out.print("Select spot for Chip " + count + ":\n");
-            String place = input.next();
-            Integer value = Integer.parseInt(place); //change input into string for key-value comparison.
+            int place = input.nextInt();
+            
             //edge case for invalid int
-            if(value>35 || value<0) {
+            if(place>35 || place<0) {
                 System.out.print("Invalid entry, choose a number between 0 and 35.\n");
             }
-            else if(chips.get(place)==place) {
-                chips.put(place, "X"); //successfully marking roulette table place w/ chip.
+            else if(!alreadyPlaced.contains(place)) {
+                table.put(place, "X"); //successfully marking roulette table place w/ chip.
                 count++;
-                System.out.print("worked"); //debug statement
+                alreadyPlaced.add(place);
             }
             //edge case if they pick place they've already chosen
-            else{
-                System.out.print("Value with key 2: " + chips.get("2"));
+            else if(alreadyPlaced.contains(place)){
                 System.out.print("You've already placed a chip here! Try another spot.\n");
+                System.out.print(table.get(place)+"\n"); //debug statement
             }
-            
-
-            
-
         }
+        System.out.print("Let's start playing!\n Spinning the wheel\n");
+        pauseForDramaticEffect(1);
+        System.out.print("...\n");
+        pauseForDramaticEffect(1);
+        System.out.print("...\n");
+        pauseForDramaticEffect(1);
+        System.out.print("...\n");
+        System.out.print("The number is!!!!");
+        pauseForDramaticEffect(1);
+        
 
 
+
+
+
+        
+
+
+    }
+    private void pauseForDramaticEffect(int seconds){
+        try {
+            Thread.sleep(seconds*1000);
+        } 
+        catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
     private void fiveNumBet() {
 
