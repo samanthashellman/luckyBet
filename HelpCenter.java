@@ -34,6 +34,8 @@ public class HelpCenter implements Command{
             else{
                 System.out.println("Input not recognized.");
             }
+
+            System.out.println();
         }
         return;
     };

@@ -74,12 +74,12 @@ public class Slots implements Command{
         if (results[0].equals(results[1]) || results[1].equals(results[2])){
             System.out.println( "You won!");
             user.updateBalance(bet*2);
-            System.out.println("$" + bet*2 + "added to your account!");
+            System.out.println("$" + bet*2 + " added to your account!");
         }
         else{
             System.out.println( "Better luck next time...");
             user.updateBalance(bet*-1);
-            System.out.println("$" + bet + "subtracted from your account");
+            System.out.println("$" + bet + " subtracted from your account");
         }
 
         pauseForDramaticEffect(1);
