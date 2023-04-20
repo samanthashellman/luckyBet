@@ -50,7 +50,7 @@ public class Roulette implements Command{
                     System.out.print("Error. Looks like your balance is isn't large enough to purchase. Try again or go to the main menu and increase your balance.");
                 }
                 else if(amountValue>35) {
-                    System.out.print("Error. The amount of additional chips exceeds the number of spots on the roulette table. Purchase less chips.");
+                    System.out.println("Error. The amount of additional chips exceeds the number of spots on the roulette table. Purchase less chips.");
                 }
                 else {
                     totalChipQuantity += amountValue;
@@ -65,7 +65,7 @@ public class Roulette implements Command{
         else if(chip == 2) {
             nonValChip = true;
             while(!end) {
-                System.out.print("Non-Value chip it is! How many would you like?");
+                System.out.println("Non-Value chip it is! How many would you like?");
                 int amountValue = input.nextInt();
                 System.out.print("How much money would you like to set for each chip? Remember, it must be more than 5.00.\n");
                 int costPerChip = input.nextInt();

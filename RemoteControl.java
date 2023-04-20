@@ -2,7 +2,10 @@ public class RemoteControl {
     // COMMAND PATTERN IMPLEMENTATION
     Command[] commands;
     User user;
-    public RemoteControl (){
+
+    public RemoteControl (User u){
+        user = u;
+
         commands = new Command[6];
         commands[0] = new Slots();
         commands[1] = new Roulette();
