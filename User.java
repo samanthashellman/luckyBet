@@ -6,12 +6,12 @@ public class User {
     int moneyWonFruit;
     int moneyWonJur;
     int moneyWonWorld;
-    int balance; //same as money?? i dunno.
+    int balance; // total money in account
     String password;
     // track power-ups too
 
     public User(){
-        balance = 50; //test balance
+        balance = 50; // starting balance
 
      }
 
