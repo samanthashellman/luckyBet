@@ -23,14 +23,14 @@ public class StartCenter {
             i = in.nextInt();
             if (i==1){
                 // sign up
-                System.out.println("Signing you up...");
-
+                SignUp signUp = new SignUp();
+                signUp.createAccount();
                 return;
             }
             else if (i==2){
                 // sign in
-                System.out.println("Signing you in...");
-
+                SignIn signIn = new SignIn();
+                signIn.verify();
                 return;
             }
             else if (i==3){
