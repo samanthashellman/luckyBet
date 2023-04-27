@@ -8,7 +8,7 @@ public class RemoteControl {
 
         commands = new Command[6];
         commands[0] = new Slots();
-        commands[1] = new Roulette(user);
+        commands[1] = new Roulette();
         commands[2] = new PowerUps();
         commands[3] = new Leaderboard();
         commands[4] = new HelpCenter();
