@@ -11,9 +11,21 @@ public class User {
     // track power-ups too
 
     public User(){
-        balance = 50; // starting balance
+        balance = 100; // starting balance
 
      }
+
+    public User(String user, String pass){
+        username = user;
+        password = pass;
+        balance = 100;
+    }
+
+    public User(String user, String pass, int money){
+        username = user;
+        password = pass;
+        balance = money;
+    }
 
     public int getBalance() {
         return balance;
