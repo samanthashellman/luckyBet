@@ -1,4 +1,3 @@
-import java.rmi.server.RemoteRef;
 import java.util.Scanner;
 
 public class StartCenter {
@@ -24,19 +23,23 @@ public class StartCenter {
             if (i==1){
                 // sign up
                 SignUp signUp = new SignUp();
-                signUp.createAccount();
+                User thisUser = signUp.createAccount();
+                ControlCenter thisGame = new ControlCenter(thisUser);
+                thisGame.takeInput();
                 return;
             }
             else if (i==2){
                 // sign in
                 SignIn signIn = new SignIn();
-                signIn.verify();
+                User thisUser = signIn.verify();
+                ControlCenter thisGame = new ControlCenter(thisUser);
+                thisGame.takeInput();
                 return;
             }
             else if (i==3){
                 // play as guest
                 System.out.println("Playing as guest...");
-                User guest = new User(); // TODO: make guest a singleton?
+                User guest = new User(); 
                 ControlCenter guestPlay = new ControlCenter(guest);
                 guestPlay.takeInput();
                 return;

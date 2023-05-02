@@ -15,6 +15,18 @@ public class User {
 
      }
 
+    public User(String user, String pass){
+        username = user;
+        password = pass;
+        balance = 100;
+    }
+
+    public User(String user, String pass, int money){
+        username = user;
+        password = pass;
+        balance = money;
+    }
+
     public int getBalance() {
         return balance;
     }
