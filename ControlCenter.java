@@ -41,7 +41,7 @@ public class ControlCenter {
 
     public static void main(String[] args){
         User guest = new User();
-        System.out.println(guest.getBalance());
+        //System.out.println(guest.getBalance());
         ControlCenter controlCenter = new ControlCenter(guest);
         controlCenter.takeInput();
     }
