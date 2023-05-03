@@ -21,7 +21,7 @@ public class ControlCenter {
     }
 
     public void takeInput(){
-
+        remote.buttonPushed(4, user);
         Scanner in = new Scanner(System.in);
         int i = 0;
 
@@ -40,7 +40,7 @@ public class ControlCenter {
     }
 
     public static void main(String[] args){
-        User guest = new User();
+        User guest = new User(null,null);
         //System.out.println(guest.getBalance());
         ControlCenter controlCenter = new ControlCenter(guest);
         controlCenter.takeInput();

@@ -1,32 +1,41 @@
+import java.util.ArrayList;
+import java.util.*;
 
-public class User {
+public class User implements Subject {
     
     String username;
+    private List<Observer> observers;
     int moneyWonRoulette;
-    int moneyWonFruit;
-    int moneyWonJur;
-    int moneyWonWorld;
+    int moneyWonSlots;
     int balance; // total money in account
     String password;
     // track power-ups too
 
-    public User(){
-        balance = 100; // starting balance
-
-     }
 
     public User(String user, String pass){
-        username = user;
-        password = pass;
-        balance = 100;
+        this.username = user;
+        this.password = pass;
+        balance = 0;
+        moneyWonSlots = 0;
+        moneyWonRoulette = 0;
+        observers = new ArrayList<Observer>();
+        notifyObservers();
     }
-
-    public User(String user, String pass, int money){
-        username = user;
-        password = pass;
-        balance = money;
+    public void registerObserver(Observer o) {
+        observers.add(o);
     }
-
+    public void removeObserver(Observer o) {
+        observers.remove(o);
+    }
+    public void notifyObservers() {
+        for(Observer observer : observers) {
+            observer.update(username,moneyWonRoulette,moneyWonSlots);
+        }
+    }
+    public void setBalance(Integer balance) {
+        this.balance = balance;
+        
+    }
     public int getBalance() {
         return balance;
     }
@@ -34,20 +43,27 @@ public class User {
         this.balance += balance;
     }
     public void updateMoneyWonRoulette(int money) {
-        moneyWonRoulette += money;
+        if(moneyWonRoulette>money) {
+            return;
+        }
+        else {
+            moneyWonRoulette = money;
+            notifyObservers();
+        }
 
     }
 
-    public void updateMoneyWonFruit( int money ){
-        moneyWonFruit += money;
+    public void updateMoneyWonSlots( int money ){
+        if(moneyWonSlots>money) {
+            return;
+        }
+        else {
+            moneyWonSlots = money;
+            notifyObservers();
+
+        }
 
     }
-    public void updateMoneyWonJur(int money) {
-        moneyWonJur += money;
 
-    }
-    public void updateMoneyWonWorld(int money) {
-        moneyWonWorld += money;
-
-    }
+   
 }

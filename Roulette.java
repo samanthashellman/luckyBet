@@ -1,9 +1,5 @@
 import java.util.Scanner; 
-import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.Hashtable;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.ThreadLocalRandom;
 public class Roulette implements Command{
 
@@ -24,11 +20,12 @@ public class Roulette implements Command{
     Roulette() { 
         buyInAmount = 0;
         initTable();
-        //this.currUser = user; TODO: make constructor take in user param
+        
         
 
     }
     public void execute(User user){
+        this.currUser = user;
         System.out.println("Let's play Roulette!");
         initTable();
         chooseBet();
@@ -196,6 +193,7 @@ public class Roulette implements Command{
             if(alreadyPlaced.contains(randomNum)) {
                 int amountWon = multiplier*buyIn;
                 System.out.print("Congrats! Your number has come up. You have won " + amountWon +".00. Your balance will be update accordingly.\n");
+                currUser.updateMoneyWonRoulette(amountWon);
             }
             else {
                 System.out.print("Your number did not come up! Better luck next time.\n");

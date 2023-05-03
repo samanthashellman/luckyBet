@@ -4,7 +4,8 @@ public class RemoteControl {
     User user;
 
     public RemoteControl (User u){
-        user = u;
+       // Leaderboard leader = Leaderboard.getInstance(); //singleton
+
 
         commands = new Command[6];
         commands[0] = new Slots();
