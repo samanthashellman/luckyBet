@@ -1,9 +1,9 @@
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 
 public class Slots implements Command{
     SlotTypes slotType;
+    Double powerUpValue = 1.0;
 
     public void pauseForDramaticEffect(int seconds){
         try {
@@ -12,6 +12,11 @@ public class Slots implements Command{
         catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+    }
+
+    public int getWinnings(String[] results, int bet){
+        // given those results, and that bet, (and any power-ups), return the amount of winnings earned
+        return 0;
     }
   
 

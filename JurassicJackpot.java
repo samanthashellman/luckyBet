@@ -4,7 +4,6 @@ public class JurassicJackpot implements SlotTypes {
     String[] results = {"", "", ""};
 
     public String[] getResults(){
-        // TODO: make this more complex
 
         results[0] = Dinosaurs[rand.nextInt(Dinosaurs.length)];
         results[1] = Dinosaurs[rand.nextInt(Dinosaurs.length)];
