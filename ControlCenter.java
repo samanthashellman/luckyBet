@@ -14,22 +14,21 @@ public class ControlCenter {
     public void printOptions(){
         System.out.println("1: Play the slot machines");
         System.out.println("2: Play Roulette");
-        System.out.println("3: Buy Power-ups");
-        System.out.println("4: See leaderboard");
-        System.out.println("5: Get help");
-        System.out.println("6: Exit");
+        System.out.println("3: See leaderboard");
+        System.out.println("4: Get help");
+        System.out.println("5: Exit");
     }
 
     public void takeInput(){
-        remote.buttonPushed(4, user);
+        remote.buttonPushed(3, user);
         Scanner in = new Scanner(System.in);
         int i = 0;
 
-        while (i != 6){
+        while (i != 5){
             System.out.println("What would you like to do now? Please input a number:");
             this.printOptions();
             i = in.nextInt();
-            if (i>0 && i<7){
+            if (i>0 && i<6){
                 remote.buttonPushed(i, user);
             }
             else{
