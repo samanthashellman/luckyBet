@@ -3,7 +3,10 @@ import java.io.*;
 import java.io.BufferedReader;  
 import java.io.FileReader; 
 
+
 public class SignIn {
+
+    Integer balance;
 
     public User verify(){
         // get username, password, check with database, then create user with their info
@@ -32,12 +35,13 @@ public class SignIn {
             password = in.next();
             passwordCorrect = comparePassword(username, password);
         }
-
+        
         System.out.println("Verifying...");
         System.out.println("Success! Welcome back.");
         
-        
-        return new User();
+        User newUser = new User(username,password);
+        newUser.setBalance(retrieveBalance(username));
+        return newUser;
     }
     private Boolean userExists(String username) {
         Boolean userExists = false;
@@ -61,6 +65,31 @@ public class SignIn {
         }
 
         return userExists;
+
+    }
+    private Integer retrieveBalance(String username) {
+        String line = ""; 
+        Integer balance = 0;
+        try {  
+            //parsing a CSV file into BufferedReader class constructor  
+            BufferedReader br = new BufferedReader(new FileReader("userInfo.csv")); 
+
+            //checking to see if username is already in database 
+            while ((line = br.readLine()) != null) {  
+                String[] userInfo = line.split(",");
+                if(username.equals(userInfo[0])) { 
+                    int i=Integer.parseInt(userInfo[2]); 
+                     balance = i;
+                }  
+            }  
+        }   
+        catch (IOException e)   
+        {  
+            e.printStackTrace();  
+        }
+
+        return balance;
+
 
     }
     

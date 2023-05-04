@@ -42,7 +42,7 @@ public class SignUp {
         try (FileWriter f = new FileWriter("userInfo.csv", true); 
         BufferedWriter b = new BufferedWriter(f); 
         PrintWriter p = new PrintWriter(b);) {
-            p.println("\n"+ username + "," + password + "," + balance.toString());
+            p.println(username + "," + password + "," + balance.toString());
         } 
         catch (IOException i) { 
             i.printStackTrace(); 

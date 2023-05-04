@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 public class Slots implements Command{
     SlotTypes slotType;
+
+    User currUser;
     Double powerUpValue = 1.0;
 
     public void pauseForDramaticEffect(int seconds){
@@ -21,6 +23,7 @@ public class Slots implements Command{
   
 
     public void execute(User user){
+        this.currUser = user;
         System.out.println("Let's play slots!");
 
         Scanner in = new Scanner(System.in);
@@ -79,6 +82,7 @@ public class Slots implements Command{
         if (results[0].equals(results[1]) || results[1].equals(results[2])){
             System.out.println( "You won!");
             user.updateBalance(bet*2);
+            user.updateMoneyWonSlots(bet*2);
             System.out.println("$" + bet*2 + " added to your account!");
         }
         else{

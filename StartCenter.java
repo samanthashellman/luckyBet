@@ -39,7 +39,7 @@ public class StartCenter {
             else if (i==3){
                 // play as guest
                 System.out.println("Playing as guest...");
-                User guest = new User(); 
+                User guest = new User(null,null); 
                 ControlCenter guestPlay = new ControlCenter(guest);
                 guestPlay.takeInput();
                 return;

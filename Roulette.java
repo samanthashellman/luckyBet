@@ -7,7 +7,7 @@ public class Roulette implements Command{
 
     private int buyInAmount;
     private User currUser;
-    private Map<Integer, String> table  = new HashMap<Integer, String>(); //tester
+    private Map<Integer, String> table  = new HashMap<Integer, String>(); 
     private List<Integer> alreadyPlaced = new ArrayList<Integer>();
     private int totalChipQuantity;
     private Boolean quit = false;
@@ -20,11 +20,12 @@ public class Roulette implements Command{
     Roulette() { 
         buyInAmount = 0;
         initTable();
-        //this.currUser = user; TODO: make constructor take in user param
+        
         
 
     }
     public void execute(User user){
+        this.currUser = user;
         System.out.println("Let's play Roulette!");
         initTable();
         chooseBet();
@@ -110,7 +111,7 @@ public class Roulette implements Command{
         //add instructions eventually
         boolean end = false;
         while(!(end)) {
-            System.out.print("Choose your bet:\n 1. The Straight Up\n 2. The 4 Number Bet\n 3. The Column Bet\n 4. The Odd or Even Bet\n 5. The High Or Low Bet\n 6. Quit Game\n");
+            System.out.print("Choose your bet:\n 1. The Straight Up\n 2. The 4 Number Bet\n 3. The Column Bet\n 4. Quit Game\n");
             Scanner bet = new Scanner(System.in); 
             int betChoice = bet.nextInt();
             if(betChoice == 1) {
@@ -125,15 +126,7 @@ public class Roulette implements Command{
                 colBet();
                 end = true;
             }
-            else if(betChoice==4) {
-                oddOrEvenBet();
-                end = true;
-            }
-            else if(betChoice==5) {
-                highOrLowBet();
-                end = true;
-            }
-            else if (betChoice==6) {
+            else if (betChoice==4) {
                 end=true;
                 quit=true;
 
@@ -192,6 +185,7 @@ public class Roulette implements Command{
             if(alreadyPlaced.contains(randomNum)) {
                 int amountWon = multiplier*buyIn;
                 System.out.print("Congrats! Your number has come up. You have won " + amountWon +".00. Your balance will be update accordingly.\n");
+                currUser.updateMoneyWonRoulette(amountWon);
             }
             else {
                 System.out.print("Your number did not come up! Better luck next time.\n");
@@ -297,13 +291,6 @@ public class Roulette implements Command{
         return;
     }
         
-
-    private void oddOrEvenBet() {
-
-    }
-    private void highOrLowBet() {
-
-    }
     private void displayTable() {
         System.out.print("  ---------------\n"); 
         int count = 0;
