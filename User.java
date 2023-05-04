@@ -65,5 +65,4 @@ public class User implements Subject {
 
     }
 
-   
 }
