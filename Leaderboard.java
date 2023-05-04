@@ -102,7 +102,7 @@ public class Leaderboard implements Command, Observer{
             try (FileWriter f = new FileWriter("leaderboard.csv", true); 
             BufferedWriter b = new BufferedWriter(f); 
             PrintWriter p = new PrintWriter(b);) {
-                p.println(username + "," + rouletteMoneyWon.toString() + "," + slotMoneyWon.toString());
+                p.println("\n"+username + "," + rouletteMoneyWon.toString() + "," + slotMoneyWon.toString());
             } 
             catch (IOException i) { 
                 i.printStackTrace(); 
