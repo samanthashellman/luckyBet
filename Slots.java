@@ -8,6 +8,8 @@ public class Slots implements Command{
     Double powerUpValue = 1.0;
 
     public void pauseForDramaticEffect(int seconds){
+        // third-party code taken from https://stackoverflow.com/questions/24104313/how-do-i-make-a-delay-in-java
+
         try {
             Thread.sleep(seconds*1000);
         } 
